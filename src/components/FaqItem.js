@@ -10,15 +10,24 @@ class FaqItem extends Component {
 
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
     this.state = {
       show: false
     };
   }
 
+  toggle() {
+    this.setState({
+      show: !this.state.show
+    });
+  }
+
   render() {
     return (
       <li className="faq-item">
-        <h2 className="question">{this.props.question}</h2>
+        <h2 onClick={this.toggle} className="question">
+          {this.props.question}
+        </h2>
         {this.state.show && <p>{this.props.answer}</p>}
       </li>
     );

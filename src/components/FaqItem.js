@@ -5,12 +5,15 @@ import "./FaqItem.css";
 class FaqItem extends Component {
   static propTypes = {
     question: PropTypes.string.isRequired,
-    answer: PropTypes.string.isRequired
+    answer: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    onDelete: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.onDelete = this.onDelete.bind(this);
     this.state = {
       show: false
     };
@@ -22,6 +25,10 @@ class FaqItem extends Component {
     });
   }
 
+  onDelete() {
+    this.props.onDelete(this.props.index);
+  }
+
   render() {
     return (
       <li className="faq-item">
@@ -29,6 +36,7 @@ class FaqItem extends Component {
           {this.props.question}
         </h2>
         {this.state.show && <p>{this.props.answer}</p>}
+        <button onClick={this.onDelete}>Delete</button>
       </li>
     );
   }

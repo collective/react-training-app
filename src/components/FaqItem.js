@@ -8,11 +8,18 @@ class FaqItem extends Component {
     answer: PropTypes.string.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
+
   render() {
     return (
       <li className="faq-item">
         <h2 className="question">{this.props.question}</h2>
-        <p>{this.props.answer}</p>
+        {this.state.show && <p>{this.props.answer}</p>}
       </li>
     );
   }

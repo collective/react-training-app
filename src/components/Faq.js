@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import FaqItem from "./FaqItem";
-import { addFaqItem } from "../actions";
+import { addFaqItem, getFaqItems } from "../actions";
 
 class Faq extends Component {
   static propTypes = {
@@ -13,7 +13,8 @@ class Faq extends Component {
         answer: PropTypes.string.isRequired
       })
     ),
-    addFaqItem: PropTypes.func.isRequired
+    addFaqItem: PropTypes.func.isRequired,
+    getFaqItems: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -25,6 +26,10 @@ class Faq extends Component {
       question: "",
       answer: ""
     };
+  }
+
+  componentDidMount() {
+    this.props.getFaqItems();
   }
 
   onChangeQuestion(event) {
@@ -89,5 +94,5 @@ export default connect(
   (state, props) => ({
     faq: state.faq
   }),
-  { addFaqItem }
+  { addFaqItem, getFaqItems }
 )(Faq);

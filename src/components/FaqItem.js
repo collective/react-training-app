@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import { editFaqItem, deleteFaqItem } from "../actions";
+
 import "./FaqItem.css";
 
 class FaqItem extends Component {
@@ -7,8 +11,8 @@ class FaqItem extends Component {
     question: PropTypes.string.isRequired,
     answer: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
-    onDelete: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired
+    editFaqItem: PropTypes.func.isRequired,
+    deleteFaqItem: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -34,7 +38,7 @@ class FaqItem extends Component {
   }
 
   onDelete() {
-    this.props.onDelete(this.props.index);
+    this.props.deleteFaqItem(this.props.index);
   }
 
   onEdit() {
@@ -61,7 +65,11 @@ class FaqItem extends Component {
     this.setState({
       mode: "view"
     });
-    this.props.onEdit(this.props.index, this.state.question, this.state.answer);
+    this.props.editFaqItem(
+      this.props.index,
+      this.state.question,
+      this.state.answer
+    );
     event.preventDefault();
   }
 
@@ -101,4 +109,7 @@ class FaqItem extends Component {
   }
 }
 
-export default FaqItem;
+export default connect(
+  () => {},
+  { editFaqItem, deleteFaqItem }
+)(FaqItem);

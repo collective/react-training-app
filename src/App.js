@@ -4,7 +4,9 @@ import { createStore, applyMiddleware } from "redux";
 
 import rootReducer from "./reducers";
 import Faq from "./components/Faq";
+import FaqItemView from "./components/FaqItemView";
 import api from "./middleware/api";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -14,7 +16,12 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Faq />
+        <BrowserRouter>
+          <div>
+            <Route exact path="/" component={Faq} />
+            <Route path="/faq/:index" component={FaqItemView} />
+          </div>
+        </BrowserRouter>
       </Provider>
     );
   }

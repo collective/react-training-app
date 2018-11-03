@@ -6,6 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.onDelete = this.onDelete.bind(this);
+    this.onEdit = this.onEdit.bind(this);
     this.onChangeQuestion = this.onChangeQuestion.bind(this);
     this.onChangeAnswer = this.onChangeAnswer.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -30,6 +31,17 @@ class App extends Component {
   onDelete(index) {
     let faq = this.state.faq;
     faq.splice(index, 1);
+    this.setState({
+      faq
+    });
+  }
+
+  onEdit(index, question, answer) {
+    let faq = this.state.faq;
+    faq[index] = {
+      question,
+      answer
+    };
     this.setState({
       faq
     });
@@ -72,6 +84,7 @@ class App extends Component {
               answer={item.answer}
               index={index}
               onDelete={this.onDelete}
+              onEdit={this.onEdit}
             />
           ))}
         </ul>

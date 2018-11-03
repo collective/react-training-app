@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+
 import rootReducer from "./reducers";
 import Faq from "./components/Faq";
+import api from "./middleware/api";
 
 import "./App.css";
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(api));
 
 class App extends Component {
   render() {

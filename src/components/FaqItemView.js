@@ -9,11 +9,23 @@ class FaqItemView extends Component {
     faqItem: PropTypes.shape({
       question: PropTypes.string,
       answer: PropTypes.string
+    }).isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func
     }).isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.onBack = this.onBack.bind(this);
+  }
+
   componentDidMount() {
     this.props.getFaqItems();
+  }
+
+  onBack() {
+    this.props.history.push("/");
   }
 
   render() {
@@ -21,6 +33,7 @@ class FaqItemView extends Component {
       <div>
         <h2 className="question">{this.props.faqItem.question}</h2>
         <p>{this.props.faqItem.answer}</p>
+        <button onClick={this.onBack}>Back</button>
       </div>
     );
   }

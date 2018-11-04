@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { editFaqItem, deleteFaqItem } from "../actions";
 
@@ -104,6 +105,7 @@ class FaqItem extends Component {
         {this.state.show && <p>{this.props.answer}</p>}
         <button onClick={this.onDelete}>Delete</button>
         <button onClick={this.onEdit}>Edit</button>
+        <Link to={`/faq/${this.props.index}`}>View</Link>
       </li>
     );
   }
